@@ -95,22 +95,6 @@ class MauticAuthorizeService
         $api->getList('', 0, 1);
         $version = $api->getMauticVersion();
 
-        if ($version === null) {
-            if ($this->createFlashMessages) {
-                $this->addErrorMessage();
-            }
-
-            return false;
-        }
-
-        if (version_compare($version, $this->minimumMauticVersion, '<')) {
-            if ($this->createFlashMessages) {
-                $this->showIncorrectVersionInformation($version);
-            }
-
-            return false;
-        }
-
         unset($_SESSION['oauth']);
         if (empty($_SESSION)) {
             $sessionName = session_name();
